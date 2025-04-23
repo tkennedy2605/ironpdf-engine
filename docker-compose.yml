@@ -16,6 +16,7 @@ services:
       - ironpdf-net
     volumes:
       - ./config/application.yml:/app/config/application.yml
+      - ./IronPdfEngine.2025.4.4.Linux.x64:/app/IronPdfEngine.2025.4.4.Linux.x64
     ports:
       - "8081:8080"
     environment:
@@ -34,6 +35,7 @@ services:
       - ironpdf-net
     volumes:
       - ./config/application.yml:/app/config/application.yml
+      - ./IronPdfEngine.2025.4.4.Linux.x64:/app/IronPdfEngine.2025.4.4.Linux.x64
     ports:
       - "8082:8080"
     environment:
