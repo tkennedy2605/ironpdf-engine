@@ -1,0 +1,46 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: ironpdf-redis
+    networks:
+      - ironpdf-net
+
+  app1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ironpdf-app1
+    depends_on:
+      - redis
+    networks:
+      - ironpdf-net
+    volumes:
+      - ./config/application.yml:/app/config/application.yml
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - IRONPDF_LICENSE_KEY=IRONSUITE.TKENNEDY2605.GMAIL.COM.25078-869803150C-DSFSJ3G-STZ5Z4OEPWEJ-S7AS4FL75DPG-D67HG5B2W7IQ-IDYBF6Y6CS3K-PQFAYDTYDJG7-46N5FJFYXUCL-VBAPLX-TB6YPZVELXWPEA-DEPLOYMENT.TRIAL-ZQYSFN.TRIAL.EXPIRES.21.MAY.2025
+
+  app2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ironpdf-app2
+    depends_on:
+      - redis
+    networks:
+      - ironpdf-net
+    volumes:
+      - ./config/application.yml:/app/config/application.yml
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - IRONPDF_LICENSE_KEY=IRONSUITE.TKENNEDY2605.GMAIL.COM.25078-869803150C-DSFSJ3G-STZ5Z4OEPWEJ-S7AS4FL75DPG-D67HG5B2W7IQ-IDYBF6Y6CS3K-PQFAYDTYDJG7-46N5FJFYXUCL-VBAPLX-TB6YPZVELXWPEA-DEPLOYMENT.TRIAL-ZQYSFN.TRIAL.EXPIRES.21.MAY.2025
+
+networks:
+  ironpdf-net:
+    driver: bridge
